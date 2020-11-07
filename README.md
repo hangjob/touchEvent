@@ -1,5 +1,7 @@
 # touchEvent
-基于Jquery扩展在移动的产生事件，包含，单次触摸事件，两次触摸事件，长按事件，滑屏事件，向上滑动事件，向下滑动事件，向左滑动事件，向右滑动事件
+基于Jquery扩展在移动端产生的事件，包含，单次触摸事件，两次触摸事件，长按事件，滑屏事件，向上滑动事件，向下滑动事件，向左滑动事件，向右滑动事件
+
+[![B4lry8.png](https://s1.ax1x.com/2020/11/07/B4lry8.png)](https://imgchr.com/i/B4lry8)
 
 ### 预览
 地址预览
@@ -45,6 +47,18 @@ $(el).swipeLeft
 #### 向右滑动事件
 ```js
 $(el).swipeRight
+```
+
+### 如何使用
+```js
+$('.container').swipeRight((res) => {
+   ulDom.append(createLi(`向右滑动了${res}px`));
+})
+
+$('.container').swipe((x, y) => {
+   ulDom.append(createLi(`滑屏事件,X轴滑动了${x}px,Y轴滑动了${y}px`));
+})
+...
 ```
 
 ### 如有疑问
