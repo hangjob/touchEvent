@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于Jquery扩展在移动的产生事件，包含，单次触摸事件，两次触摸事件，长按事件，滑屏事件，向上滑动事件，向下滑动事件，向左滑动事件，向右滑动事件</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            width: 90%;
+            height: 260px;
+            background-color: yellowgreen;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #ffffff;
+            margin-top: 30px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            padding: 10px;
+            text-align: justify;
+            font-size: 12px;
+            line-height: 20px;
+            position: relative;
+        }
+        
+        .container .pattern {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .action {
+            width: 90%;
+            margin: 0 auto;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        h5 {
+            margin-bottom: 10px;
+        }
+        
+        .action ul li {
+            list-style: none;
+            padding: 5px 0;
+            background-color: salmon;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        基于Jquery扩展在移动的产生事件，包含，单次触摸事件，两次触摸事件，长按事件，滑屏事件，向上滑动事件，向下滑动事件，向左滑动事件，向右滑动事件
+        <span class="pattern"></span>
+    </div>
+    <div class="action">
+        <h5>滑动状态记录</h5>
+        <ul>
+            <li>*如果是浏览器打开移动端模式，在滑动你的鼠标</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="/touchEvent.js"></script>
+
+    <script>
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+        if (IsPC()) {
+            $('.pattern').text('当前PC端模式')
+        } else {
+            $('.pattern').text('当前移动端模式')
+        }
+        var rdmRgbColor = function() {
+            //随机生成RGB颜色
+            var arr = [];
+            for (var i = 0; i < 3; i++) {
+                // 暖色
+                arr.push(Math.floor(Math.random() * 128 + 64));
+                // 亮色
+                arr.push(Math.floor(Math.random() * 128 + 128));
+            }
+            var [r, g, b] = arr;
+            var color = `#${r.toString(16).length > 1 ? r.toString(16) : '0' + r.toString(16)}${g.toString(16).length > 1 ? g.toString(16) : '0' + g.toString(16)}${b.toString(16).length > 1 ? b.toString(16) : '0' + b.toString(16)}`;
+            return color;
+        }
+
+        var createLi = function(str) {
+            return `<li style="background-color:${rdmRgbColor()}">${str}</li>`
+        }
+        var ulDom = $('.action ul');
+        $('.container').swipeRight((res) => {
+            ulDom.append(createLi(`向右滑动了${res}px`));
+        })
+        $('.container').swipeLeft((res) => {
+            ulDom.append(createLi(`向左滑动了${res}px`));
+        })
+        $('.container').swipeDown((res) => {
+            ulDom.append(createLi(`向下滑动了${res}px`));
+        })
+        $('.container').swipeUp((res) => {
+            ulDom.append(createLi(`向上滑动了${res}px`));
+        })
+        $('.container').swipe((x, y) => {
+            ulDom.append(createLi(`滑屏事件,X轴滑动了${x}px,Y轴滑动了${y}px`));
+        })
+        $('.container').longTap((x, y) => {
+            ulDom.append(createLi(`触发了长按事件,X轴位置${x},Y轴位置${y}`));
+        })
+        $('.container').doubleTap(() => {
+            ulDom.append(createLi(`两次触摸事件`));
+        })
+        $('.container').tap(() => {
+            ulDom.append(createLi(`单次触摸事件`));
+        })
+    </script>
+</body>
+
+</html>
