@@ -1,6 +1,10 @@
 # touchEvent
 基于Jquery扩展在移动的产生事件，包含，单次触摸事件，两次触摸事件，长按事件，滑屏事件，向上滑动事件，向下滑动事件，向左滑动事件，向右滑动事件
 
+### 预览
+地址预览
+[https://hangjob.github.io/touchEvent/index.html](https://hangjob.github.io/touchEvent/index.html)
+
 ### 事件类型
 #### 单次触摸事件
 ```js
