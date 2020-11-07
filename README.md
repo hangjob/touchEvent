@@ -44,4 +44,5 @@ $(el).swipeRight
 ```
 
 ### 如有疑问
+扫描公众号，回复：加群
 [https://www.vipbic.com/weixin.html](扫描公众号，回复：加群)
